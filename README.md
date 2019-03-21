@@ -13,7 +13,7 @@ Una vez calculado el error, éste fue graficado para observar si existía algún
 
 Luego, con el valor de K = 30 seleccionado, se procedió a ejecutar el análisis y categorización utilizando el método KMeans. Es importante destacar que estos procedimientos de análisis no supervisados no asignan automáticamente una categoría, sino que agrupan los objetos en categorías que se comportan de manera similar. Por lo tanto, para definir el nombre de cada categoría, se revisaron las 10 palabras más relevantes de cada grupo designado por el método KMeans, y se definió una categoría a partir de la interpretación de estas palabras.
 
-Finalmente, se muestra un gráfico en donde se observa la distribución de los objetos de las sociedades, en donde se observa que gran parte de estas pertenecen a un grupo generalizado.
+Finalmente, se muestra un gráfico en donde se observa la distribución de los objetos de las sociedades, se puede observar que gran parte de éstos pertenecen a un grupo generalizado.
 
 ## Método 2: Categorización a través de LDA
 
@@ -33,11 +33,10 @@ Para este método, se trató de incluir una mayor cantidad de palabras al atribu
 
 Al igual que en los otros métodos, una vez realizada la agrupación, se observaron las 10 palabras más representativas de cada categoría para tratar de clasificar cada grupo. Una vez realizado esto, a modo comparativo con el método LDA, se graficaron los coeficientes del mismo objeto de sociedad utilizado previamente.
 
-A diferencia del método anterior, no se obtuvo una distribución tan equilibrada como con el método LDA, sin embargo, esto puede atribuirse a la reducción de la cantidad de categorías, como también a la exclusión de palabras que no aportaban en la definición de categorías.
+A diferencia del método anterior, no se obtuvo una distribución tan equilibrada como con el método LDA, sin embargo, esto puede atribuirse a la reducción de la cantidad de categorías, como también a la exclusión de palabras que no aportaban en la definición de éstas.
 
 ## Otros Métodos a Explorar
 
-Además de estos métodos de análisis no supervisado utilizados para tratar de agrupar y categorizar los objetos de cada sociedad, otro método considerado fue clasificar manualmente un grupo de objetos elegidos aleatoriamente y así generar un modelo que permitiera predecir, para el resto de las sociedades no utilizadas, su categoría. Sin embargo, esto se descartó debido al tiempo que demandaría llevar a cabo esto pra un tamaño de muestra razonable, además de la probabilidad de que el modelo no incluyera todas las categorías.
+Además de estos métodos de análisis no supervisado utilizados para tratar de agrupar y categorizar los objetos de cada sociedad, otro método considerado fue clasificar manualmente un grupo de objetos elegidos aleatoriamente y así generar un modelo que permitiera predecir, para el resto de las sociedades no utilizadas, su categoría. Sin embargo, esto se descartó debido al tiempo que demandaría llevar a cabo esto para un tamaño de muestra razonable, además de la probabilidad de que el modelo no incluyera todas las categorías necesarias.
 
-Otro procedimiento a seguir sería tomar los objetos de sociedades que fueron clasificados de manera general, generar una nueva base de
-datos con éstos y realizar nuevamente este análisis no supervisado. Probablemente, la reducción del tamaño de muestra permitiría que otras palabras que no fueron consideradas por su frecuencia original, ahora influyeran en la categorización de los objetos, permitiendo agrupar de mejor forma esta categoría.
+Otro procedimiento a seguir sería tomar los objetos de sociedades que fueron clasificados a una categoría general, crear una nueva base de datos con éstos y realizar nuevamente este análisis no supervisado. Probablemente, la reducción del tamaño de muestra permitiría que otras palabras que no fueron consideradas por su frecuencia original, ahora influyeran en la categorización de los objetos, permitiendo agrupar de mejor forma este grupo.
