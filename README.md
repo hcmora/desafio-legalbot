@@ -1,2 +1,36 @@
-# desafio-legalbot
-Análisis no supervisado de un archivo de texto con aproximadamente 3500 entradas de objetos de sociedades
+# Desafío Legalbot
+El objetivo de este desafío es construir un clasificador que sea capaz de categorizar los 3.503 objetos de sociedades entregados en el archivo "objetos.txt" en K categorías, donde K es un número definido por el usuario.
+
+El método con el que este problema fue abordado fue a través de un análisis no supervisado de datos, en donde se buscó agrupar los objetos de cada sociedad en grupos que compartieran similares características, basándome principalmente en la frecuencia de las palabras utilizadas en cada objeto.
+
+Para llevar a cabo esta categorización, se utilizaron 3 métodos diferentes, en donde cada uno fue contribuyendo al siguiente. En este análisis no se buscó identificar el mejor método de clasificación, sino tratar de contribuir en cada iteración a mejorar la clasificación realizada por el método previo.
+
+## Método 1: Categorización a través de K-Means
+
+Este método consiste en agrupar los objetos de las sociedades utilizando la similitud que exista entre las palabras utilizadas en la definición de la sociedad. Al ser el primer método utilizado, se realizó un análisis exploratorio para tratar de definir el valor de K, en donde se iteró el proceso de categorización para k=1..40 y se calculó el error (o distancia) que existía entre los valores de los objetos, y los centroides de cada categoría.
+
+Una vez calculado el error, éste fue graficado para observar si existía algún k en donde se produjera un "salto" en la disminución del error, acorde al método del codo ([Elbow Method](https://en.wikipedia.org/wiki/Elbow_method_(clustering))) para así elegir la cantidad de categorías. Sin embargo, no se pudo observar esto, por lo que se decidió utilizar un valor de k en donde, al agregar otra categoría, el error aumentaba.
+
+Luego, con el valor de k = 30 seleccionado, se procedió a ejecutar el análisis y categorización utilizando el método KMeans. Es importante destacar que estos procedimientos de análisis no supervisados no asignan automáticamente una categoría, sino que agrupan los objetos en categorías que se comportan de manera similar. Por lo tanto, para definir el nombre de cada categoría, se revisaron las 10 palabras más relevantes de cada grupo designado por el método KMeans, y se definió una categoría a partir de la interpretación de estas palabras.
+
+Finalmente, se muestra un gráfico en donde se observa la distribución de los objetos de las sociedades, en donde se observa que gran parte de estas pertenecen a un grupo generalizado.
+
+## Método 2: Categorización a través de LDA
+
+El método LDA (Latent Dirichlet Allocation) busca categorizar cada documento a través de la probabilidad de que éste pertenezca a cierta categoría, donde cada categoría está compuesta por palabras que poseen una probabilidad de representar a dicha categoría. Al igual que en el método anterior, el valor de k debe ser definido por el usuario, sin embargo, del primer análisis se concluyó que se podía disminuir el valor de k a 20 para tratar de agrupar, en términos más generales, los objetos de las sociedades.
+
+Además, para este método, se asignaron palabras que no iban a ser consideradas para la categorización, utilizando el atributo "stop_words" de las funciones vectorizadoras. Esto se realizó debido a la gran presencia de conectores como palabras relevantes en los criterios de categorización. 
+
+Al igual que en el proceso previo, una vez ejecutado el método, se procedió a definir el nombre de cada categoría observando las 10 palabras con mayor probabilidad de pertenecer a dicha categoría. Además, de manera representativa, se incluyó un gráfico donde se muestra la distribución de probabilidad de un objeto de una sociedad de pertenecer a alguna de las categorías. 
+
+Por último, se graficó la distribución de las categorías, donde a simple vista, se observa mejor distribuida que en el método anterior.
+
+## Método 3: Categorización a través de NMF
+
+El método NMF (Non-Negative Matrix Factorization) busca categorizar los documentos a través de la descomposición de la matriz sparse que se genera al vectorizar la base de objetos en una combinación lineal de k dimensiones. 
+
+Para este método, se trató de incluir una mayor cantidad de palabras al atributo "stop_words", para así tratar de categorizar utilizando palabras más representativas de los objetos de las sociedades. Además, por como se observó el comportamiento en el método LDA, se redujo el valor de k a 15.
+
+Al igual que en los otros métodos, una vez realizada la agrupación, se observaron las 10 palabras más representativas de cada categoría para tratar de clasificar cada grupo. Una vez realizado esto, a modo comparativo con el método LDA, se graficaron los coeficientes del mismo objeto de sociedad utilizado previamente.
+
+A diferencia del método anterior, no se obtuvo una distribución tan equilibrada como con el método LDA, sin embargo, esto puede atribuirse a la reducción de la cantidad de categorías, como también a la exclusión de palabras que no aportaban en la definición de categorías.
